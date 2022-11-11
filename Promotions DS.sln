@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Promotions DS", "Promotions DS.csproj", "{A89760EC-0C11-4413-B774-34DB1C7C1E0B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\EEY DS Library\Data\Data.csproj", "{AA12BD13-95BE-4FA7-B7DF-A06397F9E0BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\EEY-DS-Library\Data\Data.csproj", "{AA12BD13-95BE-4FA7-B7DF-A06397F9E0BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "..\EEY DS Library\API\API.csproj", "{C5F904D3-242C-4E7E-A3B7-3C907D53B7A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "..\EEY-DS-Library\API\API.csproj", "{C5F904D3-242C-4E7E-A3B7-3C907D53B7A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
