@@ -1,0 +1,75 @@
+﻿@page
+
+@model EEY.DigitalServices.Promotions.Pages.QualificationsAddEditModel
+
+@{
+    // We need to identify which qualification in the list must be edited or if to be added
+
+    if (Model.Qualification.AutoKey <= 0)
+    {
+        ViewData["Title"] = "Προσθέστε τα ακαδημαϊκά σας προσόντα";
+    }
+    else
+    {
+        ViewData["Title"] = "Αλλάξτε τα ακαδημαϊκά σας προσόντα";
+    }
+
+}
+
+<!--Main-->
+<main class="govcy-container govcy-my-2" id="mainContainer">
+    <div class="row">
+        <div class="govcy-col-9 govcy-order-last">
+
+            <h1>@ViewData["Title"]</h1>
+
+            <form method="post" class="govcy-form">
+                <input type="hidden" asp-for="@Model.Qualification.AutoKey"/>
+                <input type="hidden" asp-for="@Model.Qualification.Level" />
+                <input type="hidden" asp-for="@Model.Qualification.FromYear" />
+                <input type="hidden" asp-for="@Model.Qualification.ApplicationCode" />
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="@Model.Qualification.Title">Τίτλος Σπουδών</label>
+                    <span class="govcy-hint">Καταχωρήστε τον τίτλο σπουδών</span>
+                    <input type="text" maxlength="400" class="govcy-text-input govcy-text-input-char_40" asp-for="@Model.Qualification.Title" value="@Model.Qualification.Title">
+                    <span asp-validation-for="@Model.Qualification.Title"></span>
+                </div>
+
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="@Model.Qualification.Institution">Εκπαιδευτικό Ίδρυμα</label>
+                    <span class="govcy-hint">Καταχωρήστε το εκπαιδευτικό ίδρυμα</span>
+                    <input type="text" maxlength="400" class="govcy-text-input govcy-text-input-char_40" asp-for="@Model.Qualification.Institution" value="@Model.Qualification.Institution">
+                    <span asp-validation-for="@Model.Qualification.Institution"></span>
+                </div>
+
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="@Model.Qualification.Country">Χώρα</label>
+                    <span class="govcy-hint">Επιλέξτε τη χώρα απόκτησης</span>
+                    <select class="govcy-select govcy-text-input-char_20 govcy-p-2" asp-for="@Model.Qualification.Country" value="@Model.Qualification.Country">
+                        <option value=@Model.Qualification.Country selected>@Model.Qualification.Country</option>
+                        <option value="Κύπρος">Κύπρος</option>
+                        <option value="Ελλάδα">Ελλάδα</option>
+                        <option value="Αγγλία">Αγγλία</option>
+                        <option value="Ηνωμένες Πολιτείες">Ηνωμένες Πολιτείες</option>
+                        <option value="Γαλλία">Γαλλία</option>
+                    </select>
+                    <span asp-validation-for="@Model.Qualification.Country"></span>
+                </div>
+
+                <div class="govcy-form-control">
+                    <label class="govcy-label" for="@Model.Qualification.ToYear">Έτος απόκτησης</label>
+                    <span class="govcy-hint">Καταχωρήστε το έτος απόκτησης</span>
+                    <input type="text" maxlength="4" class="govcy-text-input govcy-text-input-char_6 govcy-p-3" asp-for="@Model.Qualification.ToYear" value="@Model.Qualification.ToYear">
+                    <span asp-validation-for="@Model.Qualification.ToYear"></span>
+                </div>
+
+                <div>
+                    <input type="submit" value="Αποθήκευση" class="btn govcy-btn-secondary" />
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</main>

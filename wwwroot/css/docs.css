@@ -1,0 +1,101 @@
+.example-box {
+    background-color: #F8F9FA;
+    border: 1px solid #dee2e6;
+    margin-top:10px; margin-bottom:10px ;
+}
+.example-box-inner {
+    border: 1px solid black;
+    margin-top:10px; margin-bottom:10px ;
+    padding-top:10px; padding-bottom:10px ;
+    background-color: #cfe2ff;
+}
+.example-box-outter {
+    border: 1px solid black;
+    margin-top:10px; margin-bottom:10px ;
+    padding-top:10px; padding-bottom:10px ;
+    background-color: #e2e8e1;
+}
+
+.w-100-px{width: 100px !important;}
+
+/** TOC */
+
+/* .toc {background-color: rgb(235,241,243);border: 1px solid #ddd;font-size: 1rem;}*/
+/* .toc-outter {border: 1px solid #ddd;font-size: 1rem;} */
+.toc-outter {font-size: 1rem;}
+.toc ol {list-style-type:disc ;}
+
+/** Bootsrap img-fluid */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/** nav-side */
+.nav-side {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+  }
+
+/** Search */
+:root {
+    --aa-search-input-height: 44px;
+    --aa-primary-color-rgb: 38, 38, 39;
+}
+
+.aa-Autocomplete { 
+width: 100%;
+}
+
+.aa-Form, .aa-DetachedSearchButton{
+border: 3px solid #272525;
+outline: none;
+border-radius: 0px;
+}
+
+.aa-Form:focus-within {
+border: 3px solid #272525;
+box-shadow: 0 0 0 4pt #ffdd00;
+outline: medium none currentColor;
+border-radius: 0px;
+}
+
+@media (min-width: 768px){
+.aa-Autocomplete { 
+    width: 100%;
+}
+}
+
+/** Overwrite for menu to have second row */
+
+@media (min-width: 768px)
+{
+    .govcy-header ul.govcy-menu li a {
+        /*margin: 20px 16px 0 0;*/
+        margin: 18px 16px 0 0;
+        padding: 0;
+    }
+
+    .govcy-header ul.govcy-menu {
+        /* clear: none; */
+        /* float: right; */
+        clear:both;
+        float: left;
+        max-height: none;
+        padding-left: 15px;
+    }
+}
+
+header.govcy-bg-primary-right:after {
+    background-color: #31576F;
+    bottom: 0;
+    content: ' ';
+	height: 109px;
+    /* height: 64px; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    z-index: -1;
+}

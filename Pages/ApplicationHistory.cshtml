@@ -1,0 +1,54 @@
+﻿@page
+
+@using EEY.DigitalServices.Promotions.Mock.Data
+
+@model EEY.DigitalServices.Promotions.Pages.ApplicationHistoryModel
+
+@{
+    ViewData["Title"] = "Ιστορικό ολοκληρώμενων αιτήσεων";
+}
+
+<!--Main-->
+<main class="govcy-container govcy-my-2" id="mainContainer">
+    <div class="row">
+        <div class="govcy-col-9 govcy-order-last">
+
+            <h1>@ViewData["Title"]</h1>
+
+            @{
+                int i = 1;
+            }
+
+            <div class="govcy-table-responsive">
+                <table class="govcy-table">
+                    @foreach (PromotionApplication application in Model.Applications)
+                    {
+                        string positionTagID = "position" + i;
+                        string publicationTagID = "publication" + i;
+                        string deadlineTagID = "deadline" + i;
+                        string nextTagID = "next" + i;
+                        if (!application.Active)
+                        {
+                            <tr>
+                                <td><b>@i</b></td>
+                                <td>
+                                    <b>Θέση: </b><span id=@positionTagID>@application.PostDetails.Description</span><br>
+                                    <b>Προκήρυξη: </b><span id=@publicationTagID>@application.PostDetails.PublicationID</span><br>
+                                    <b>Ημερομηνία Υποβολής Αίτησης: </b><span id=@deadlineTagID>@application.PostDetails.OpensOn</span>
+                                </td>
+                                <td>
+                                    <a id=@nextTagID href="~/ApplicationData">Προβολή</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </table>
+            </div>
+
+            <button type="button" class="govcy-btn-primary" onclick="javascript:window.location='/PositionSelection'">Συνεχίστε την αίτηση</button>
+
+        </div>
+
+    </div>
+</main>

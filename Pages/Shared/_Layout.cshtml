@@ -1,0 +1,157 @@
+﻿<!doctype html>
+<html lang="el">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Social -->
+    <meta property="og:description" content="Αίτηση για Προαγωγή για Εκπαιδευτικούς της Δημόσιας Εκπαίδευσης">
+    <meta property="og:title" content="Αίτηση για Προαγωγή - EEY.GOV.CY">
+    <meta property="og:url" content="https://eeycy.github.io/promotions_ds">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://eeycy.github.io/promotions_ds/wwwroot/img/icons-512.png">
+    <meta property="og:site_name" content="ΕΕΥ.GOV.CY">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://eeycy.github.io/promotions_ds">
+    <meta property="twitter:title" content="MOCK Αίτηση για Προαγωγή - EEY.GOV.CY">
+    <meta property="twitter:description" content="MOCK Αίτηση για Προαγωγή για Εκπαιδευτικούς της Δημόσιας Εκπαίδευσης">
+    <meta property="twitter:image" content="https://eeycy.github.io/promotions_ds/wwwroot/img/icons-512.png">
+
+    <!-- Theme -->
+    <link rel="manifest" href="~/manifest.json">
+    <meta name="theme-color" content="#31576F">
+    <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="img/apple-touch-icon-120x120-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57x57-precomposed.png">
+
+    <!-- CSS -->
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    @*  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/promotions_razor.styles.css" asp-append-version="true" />
+    *@
+    <title>Αίτηση για Προαγωγή - EEY.GOV.CY</title>
+    <meta name="description" content="Αίτηση για Προαγωγή για Εκπαιδευτικούς της Δημόσιας Εκπαίδευσης">
+
+
+</head>
+
+
+<body>
+
+    <!--Header-->
+    <div class="govcy-container">
+        <div class="row">
+            <header class="govcy-header govcy-bg-primary govcy-text-white govcy-bg-primary-right">
+                <a href="#" class="govcy-logo"> <img></a>
+                <form class="govcy-text-white govcy-bg-primary">
+                    <select name="govcy-lang-menu" class="govcy-lang-menu govcy-text-white">
+                        <option value="English">English</option>
+                        <option value="Greek">Ελληνικά</option>
+                    </select>
+                </form>
+                <span class="govcy-service-name">Αίτηση για Προαγωγή</span>
+            </header>
+        </div>
+    </div>
+
+    <!--beforeMain-->
+    <section class="govcy-container govcy-mb-4" id="beforeMainContainer">
+        <div class="govcy-float-start">
+            <span class="bi bi-chevron-left"></span>
+            <a href="javascript:history.back()" class="govcy-back-link">Πίσω</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <div class="govcy-container-fluid govcy-br-top-8 govcy-br-top-primary govcy-p-3 govcy-bg-light govcy-d-print-none">
+        <div class="govcy-container">
+            <div class="row">
+                <footer class="govcy-footer">
+                    <span class="govcy-d-inline-block govcy-valign-top govcy-pb-2"><img alt="govcy-logo"></span>
+                    <ul class="govcy-d-inline-block  govcy-m-0 govcy-pl-3 govcy-efs-medium">
+                        <li><a href="#">Privacy statement</a></li>
+                        <li><a href="#">Cookie policy</a></li>
+                        <li><a href="#">Accessibility statement</a></li>
+                        <li class="govcy-d-block govcy-text-dark">© Republic of Cyprus, 2021</li>
+                    </ul>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+@*    <script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
+    <script>
+        const { autocomplete } = window['@algolia/autocomplete-js'];
+    </script>
+*@
+<script>
+    autocomplete({
+        container: '#autocomplete',
+        placeholder: 'Search Design System',
+        getSources() {
+            return [
+                {
+                    sourceId: 'links',
+                    getItems({ query }) {
+                        return [
+                            {
+                                label: "Colours", url: '/govcy-design-system-docs/styles/colour/', keys: ""
+                            }, { label: "Page Templates", url: '/govcy-design-system-docs/styles/page_templates/', keys: "" }, { label: "Grid system", url: '/govcy-design-system-docs/styles/grid/', keys: "" }, { label: "Vertical Spacing", url: '/govcy-design-system-docs/styles/vertical_spacing/', keys: "" }, { label: "Layout", url: '/govcy-design-system-docs/styles/layout/', keys: "" }, { label: "Typography", url: '/govcy-design-system-docs/styles/typography/', keys: "fonts text Paragraph Headings Unordered Ordered list Links" }, { label: "Back Link", url: '/govcy-design-system-docs/components/back_link/', keys: "" }, { label: "Button", url: '/govcy-design-system-docs/components/button/', keys: "" }, { label: "Checkbox", url: '/govcy-design-system-docs/components/checkbox/', keys: "" }, { label: "Date input", url: '/govcy-design-system-docs/components/date_input/', keys: "" }, { label: "Error Message", url: '/govcy-design-system-docs/components/error_message/', keys: "" }, { label: "Error Summary", url: '/govcy-design-system-docs/components/error_summary/', keys: "" }, { label: "Fieldset", url: '/govcy-design-system-docs/components/fieldset/', keys: "" }, { label: "File", url: '/govcy-design-system-docs/components/file/', keys: "" }, { label: "Footer", url: '/govcy-design-system-docs/components/footer/', keys: "" }, { label: "Header", url: '/govcy-design-system-docs/components/header/', keys: "" }, { label: "Panel", url: '/govcy-design-system-docs/components/panel/', keys: "success panel" }, { label: "Radio", url: '/govcy-design-system-docs/components/radio/', keys: "" }, { label: "Table", url: '/govcy-design-system-docs/components/table/', keys: "" }, { label: "Text Input", url: '/govcy-design-system-docs/components/text_input/', keys: "" }, { label: "User’s name and sign out", url: '/govcy-design-system-docs/components/user_name_and_sign_out/', keys: "" }, { label: "Check answers", url: '/govcy-design-system-docs/patterns/check_answers/', keys: "" }, { label: "Email", url: '/govcy-design-system-docs/patterns/email/', keys: "" }, { label: "Hint Text", url: '/govcy-design-system-docs/patterns/hint_text/', keys: "" }, { label: "Labels and legends headings", url: '/govcy-design-system-docs/patterns/labels_and_legend_headings/', keys: "" }, { label: "Names", url: '/govcy-design-system-docs/patterns/names/', keys: "" }, { label: "Question pages", url: '/govcy-design-system-docs/patterns/question_pages/', keys: "" }, { label: "Telephone", url: '/govcy-design-system-docs/patterns/telephone/', keys: "" }, { label: "Design System", url: '/govcy-design-system-docs/', keys: "" }, { label: "Get Started", url: '/govcy-design-system-docs/getting_started/', keys: "CSS CDN meta tags social theme manifest icon" }, { label: "Styles", url: '/govcy-design-system-docs/styles/', keys: "" }, { label: "Components", url: '/govcy-design-system-docs/components/', keys: "" }, { label: "Patterns", url: '/govcy-design-system-docs/patterns/', keys: "" }, { label: "Utilities", url: '/govcy-design-system-docs/css_utilities/', keys: "" }, { label: "Moving from Version 0.1.0", url: '/govcy-design-system-docs/moving_from_v_0/', keys: "" },
+                        ].filter(({ label, keys }) =>
+                            label.toLowerCase().includes(query.toLowerCase())
+                            || keys.toLowerCase().includes(query.toLowerCase())
+                        );
+                    },
+                    getItemUrl({ item }) {
+                        return item.url;
+                    },
+                    templates: {
+                        item({ item, createElement }) {
+                            return createElement('div', {
+                                dangerouslySetInnerHTML: {
+                                    __html: `<div>
+                                    <a
+                                        href="${item.url}">
+                                        ${item.label}
+                                    <a/>
+                                    </div>`,
+                                },
+                            });
+                        },
+                        noResults() {
+                            return 'No results.';
+                        }
+                    }
+                    // ...
+                },
+            ];
+        }
+    });
+</script>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</html>

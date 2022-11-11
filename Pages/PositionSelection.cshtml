@@ -1,0 +1,87 @@
+﻿@page
+
+@using Newtonsoft.Json
+@using EEY.DigitalServices.Promotions.Mock.Data
+
+@model EEY.DigitalServices.Promotions.Pages.PositionSelectionModel
+
+@{
+    ViewData["Title"] = "Μπορείτε να υποβάλετε αίτηση για τις πιο κάτω θέσεις";
+}
+
+<!--Main-->
+<main class="govcy-container govcy-my-2" id="mainContainer">
+    <div class="row">
+        <div class="govcy-col-9 govcy-order-last">
+
+            <h1>@ViewData["Title"]</h1>
+
+            @{
+                int i = 1;
+                Dictionary<string, string> getArguments;
+            }
+
+            <div class="govcy-table-responsive">
+                <table class="govcy-table">
+                    @foreach (PromotionApplication application in Model.Applications)
+                    {
+                        string positionTagID = "position" + i;
+                        string publicationTagID = "publication" + i;
+                        string deadlineTagID = "deadline" + i;
+                        string nextTagID = "next" + i;
+
+                        if (application.Active)
+                        {
+
+                            getArguments = new Dictionary<string, string> { { "applid", JsonConvert.SerializeObject(@application.IDNumber) } };
+
+                            <tr>
+                                <td><b>@i</b></td>
+                                <td>
+                                    <b>Θέση: </b><span id=@positionTagID>@application.PostDetails.Description</span><br>
+                                    <b>Προκήρυξη: </b><span id=@publicationTagID>@application.PostDetails.PublicationID</span><br>
+                                    <b>Προθεσμία Υποβολής Αίτησης: </b><span id=@deadlineTagID>@application.PostDetails.OpensOn</span>
+                                </td>
+                                <td>
+                                    <b>Παραλήφθηκε</b>
+                                </td>
+                                <td>
+                                    <a id=@nextTagID asp-page="./CheckDetails" asp-all-route-data="getArguments">Επεξεργασία</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    @foreach (PublishedPost availablePost in Model.AvailablePosts)
+                    {
+                        string positionTagID = "position" + i;
+                        string publicationTagID = "publication" + i;
+                        string deadlineTagID = "deadline" + i;
+                        string nextTagID = "next" + i;
+
+                        getArguments = new Dictionary<string, string> { { "applid", JsonConvert.SerializeObject(@availablePost.IDNumber) } };
+
+                        <tr>
+                            <td><b>@i</b></td>
+                            <td>
+                                <b>Θέση: </b><span id=@positionTagID>@availablePost.Description</span><br>
+                                <b>Προκήρυξη: </b><span id=@publicationTagID>@availablePost.PublicationID</span><br>
+                                <b>Προθεσμία Υποβολής Αίτησης: </b><span id=@deadlineTagID>@availablePost.OpensOn</span>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <a id=@nextTagID asp-page="./Qualifications" asp-all-route-data="getArguments">Αίτηση</a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </table>
+            </div>
+
+            <div class="govcy-mb-4"><a href="~/ApplicationHistory">Ιστορικό Ολοκληρωμένων Αιτήσεων</a></div>
+
+        </div>
+
+    </div>
+</main>

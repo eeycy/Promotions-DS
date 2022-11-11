@@ -1,0 +1,2 @@
+{"IDNumber":27,"PublicationID":9,"OpensOn":"2021-03-05T00:00:00","PostID":4,"Description":"Βοηθός Διευθυντής Σχολείων Μέσης Γενικής Εκπαίδευσης για τα Φιλολογικά","ServiceCode":50,"CanSubmitMilitaryCert":true,"MilitaryCertComments":""}
+{"IDNumber":39,"PublicationID":10,"OpensOn":"2021-07-28T00:00:00","PostID":4,"Description":"Βοηθός Διευθυντής Σχολείων Μέσης Γενικής Εκπαίδευσης για τα Φιλολογικά","ServiceCode":50,"CanSubmitMilitaryCert":true,"MilitaryCertComments":""}

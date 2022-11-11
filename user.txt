@@ -1,0 +1,1 @@
+{"IDNumber":876123,"Level":2,"FileNumber":123456,"LastName":"Γεωργίου","FirstName":"Γεωργία","DateOfBirth":"1988-02-24T00:00:00","ServiceCode":1,"SpecialtyCode":1,"Specialty":"Φιλόλογος","SpecialtyFull":"Καθηγήτρια ΦΙλολογικών","TelNumber":"99777777","EMail":"gg@example.com"}

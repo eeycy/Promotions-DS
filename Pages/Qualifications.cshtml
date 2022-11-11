@@ -1,0 +1,83 @@
+﻿@page
+
+@using Newtonsoft.Json
+@using EEY.DigitalServices.Data
+
+@model EEY.DigitalServices.Promotions.Pages.QualificationsModel
+
+@{
+    ViewData["Title"] = "Ενημερώστε τα ακαδημαϊκά σας προσόντα";
+}
+
+<!--Main-->
+<main class="govcy-container govcy-my-2" id="mainContainer">
+    <div class="row">
+        <div class="govcy-col-9 govcy-order-last">
+
+            <h1>@ViewData["Title"]</h1>
+
+            <p>Μπορείτε να προσθέσετε νέα ακαδημαϊκά προσόντα.  Μπορείτε να διορθώσετε τα προσόντα που έχετε δηλώσει σε προηγούμενη αίτηση σας.</p>
+
+            @{
+                int i = 1;
+                Dictionary<string, string> getArguments;
+            }
+
+            <div class="govcy-table-responsive">
+                <table class="govcy-table">
+                    @foreach (PromotionApplicationQualification qualification in Model.TeacherQualifications)
+                    {
+                        string titleTagID = "title" + i;
+                        string institutiionTagID = "institution" + i;
+                        string countryTagID = "country" + i;
+                        string yearToTagID = "yearTo" + i;
+                        string nextTagID = "next" + i;
+
+                        getArguments = new Dictionary<string, string> {
+                            { "qualid", JsonConvert.SerializeObject(qualification.AutoKey) },
+                            { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) }
+                        };
+
+                        <tr>
+                            <td><b>@i</b></td>
+                            <td>
+                                <b>Τίτλος Σπουδών:</b>
+                                <br>
+                                <b>Ίδρυμα:</b>
+                                <br>
+                                <b>Χώρα:</b>
+                                <br>
+                                <b>Έτος απόκτησης:</b>
+                            </td>
+                            <td>
+                                <span id=@titleTagID>@qualification.Title</span>
+                                <br>
+                                <span id=@institutiionTagID>@qualification.Institution</span>
+                                <br>
+                                <span id=@countryTagID>@qualification.Country</span>
+                                <br>
+                                <span id=@yearToTagID>@qualification.ToYear</span>
+                            </td>
+                            <td>
+                                <a asp-page="./QualificationsAddEdit" asp-all-route-data="getArguments">Αλλαγή</a>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </table>
+            </div>
+
+            @{
+                getArguments = new Dictionary<string, string> {
+                    { "qualid", JsonConvert.SerializeObject(0) },
+                    { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) }
+                };
+                <button type="button" class="govcy-btn-secondary"><a asp-page="./QualificationsAddEdit" asp-all-route-data="getArguments">Προσθήκη Νέου</a></button>
+            }
+            <br>
+            <button type="button" class="govcy-btn-primary"><a asp-page="./CheckDetails" asp-all-route-data="getArguments">Επόμενο</a></button>
+
+        </div>
+
+    </div>
+</main>

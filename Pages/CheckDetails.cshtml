@@ -1,0 +1,113 @@
+﻿@page
+
+@using Newtonsoft.Json
+@using EEY.DigitalServices.Data
+
+@model EEY.DigitalServices.Promotions.Pages.CheckDetailsModel
+@{
+    ViewData["Title"] = "Ελέγξτε αν τα στοιχεία της αίτησης σας είναι σωστά";
+}
+
+<!--Main-->
+<main class="govcy-container govcy-my-2" id="mainContainer">
+    <div class="row">
+        <div class="govcy-col-9 govcy-order-last">
+
+            <h1>@ViewData["Title"]</h1>
+
+            @{
+                int i = 1;
+                Dictionary<string, string> getArguments;
+                Dictionary<string, string> detailEditArguments = new Dictionary<string, string> { { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) } };
+            }
+
+            <div class="govcy-table-responsive">
+                <table class="govcy-table">
+
+                    <tr>
+                        <td><b>Προσωπικά Στοιχεία</b></td>
+                        <td></td>
+                        <td>
+                            <b>Ονοματεπώνυμο: </b>
+                            <br>
+                            <span id=fullNameCheck>@Model.ApplicantTeacher.FirstName @Model.ApplicantTeacher.LastName</span>
+                            <br>
+                            <b>Αρ. Φακέλου: </b>
+                            <br>
+                            <span id=fileNumberCheck>@Model.ApplicantTeacher.FileNumber</span>
+                            <br>
+                            <b>Τηλέφωνο: </b>
+                            <br>
+                            <span id=telNumberCheck>@Model.ApplicantTeacher.TelNumber</span>
+                            <br>
+                            <b>E-mail: </b>
+                            <br>
+                            <span id=eMailCheck>@Model.ApplicantTeacher.EMail</span>
+                        </td>
+                        <td>
+                            <br><br><br><br><br>
+                            <a asp-page="./EditPhoneDetails" asp-all-route-data="detailEditArguments">Αλλαγή</a>
+                            <br><br>
+                            <a asp-page="./EditEmailDetails" asp-all-route-data="detailEditArguments">Αλλαγή</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Θέση για την οποία υποβάλλεται η αίτηση</b></td>
+                        <td></td>
+                        <td><span id=positionCheck>@Model.CurrentApplication.PostDetails.Description</span></td>
+                        <td></td>
+                    </tr>
+
+                    @foreach (PromotionApplicationQualification qualification in Model.TeacherQualifications)
+                    {
+                        string titleTagID = "title" + i;
+                        string institutiionTagID = "institution" + i;
+                        string countryTagID = "country" + i;
+                        string yearToTagID = "yearTo" + i;
+                        string nextTagID = "next" + i;
+                        string qualificationsHeading;
+
+                        getArguments = new Dictionary<string, string> {
+                            { "qualid", JsonConvert.SerializeObject(qualification.AutoKey) },
+                            { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) }
+                        };
+
+                        if (@i == 1)
+                            qualificationsHeading = "Πρόσθετα Ακαδημαϊκά Προσόντα";
+                        else
+                            qualificationsHeading = "";
+                        <tr>
+                            <td><b>@qualificationsHeading</b></td>
+                            <td><b>@i.</b></td>
+                            <td>
+                                <b>Τίτλος Σπουδών: </b><span id=@titleTagID>@qualification.Title</span>
+                                <br>
+                                <b>Ίδρυμα: </b><span id=@institutiionTagID>@qualification.Institution</span>
+                                <br>
+                                <b>Χώρα: </b><span id=@countryTagID>@qualification.Country</span>
+                                <br>
+                                <b>Έτος απόκτησης: </b><span id=@yearToTagID>@qualification.ToYear</span>
+                            </td>
+                            <td>
+                                <a asp-page="./QualificationsAddEdit" asp-all-route-data="getArguments">Αλλαγή</a>
+                            </td>
+                        </tr>
+
+                        i++;
+                    }
+
+                    <tr>
+                        <td><b>Πιστοποιητικό στρατολογικής κατάστασης "Α"</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</main>
