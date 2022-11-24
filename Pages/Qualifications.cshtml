@@ -20,7 +20,6 @@
 
             @{
                 int i = 1;
-                Dictionary<string, string> getArguments;
             }
 
             <div class="govcy-table-responsive">
@@ -32,11 +31,6 @@
                         string countryTagID = "country" + i;
                         string yearToTagID = "yearTo" + i;
                         string nextTagID = "next" + i;
-
-                        getArguments = new Dictionary<string, string> {
-                            { "qualid", JsonConvert.SerializeObject(qualification.AutoKey) },
-                            { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) }
-                        };
 
                         <tr>
                             <td><b>@i</b></td>
@@ -59,7 +53,16 @@
                                 <span id=@yearToTagID>@qualification.ToYear</span>
                             </td>
                             <td>
-                                <a asp-page="./QualificationsAddEdit" asp-all-route-data="getArguments">Αλλαγή</a>
+                                <form method="post" class="govcy-form" asp-page-handler="AddEditQualification">
+                                    @{
+                                        Model.QualificationKey = qualification.AutoKey;
+                                    }
+                                    <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                                    <input type="hidden" asp-for="@Model.QualificationKey" />
+                                    <div>
+                                        <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                         i++;
@@ -67,15 +70,25 @@
                 </table>
             </div>
 
-            @{
-                getArguments = new Dictionary<string, string> {
-                    { "qualid", JsonConvert.SerializeObject(0) },
-                    { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) }
-                };
-                <button type="button" class="govcy-btn-secondary"><a asp-page="./QualificationsAddEdit" asp-all-route-data="getArguments">Προσθήκη Νέου</a></button>
-            }
+            <form method="post" class="govcy-form" asp-page-handler="AddEditQualification">
+                @{
+                    Model.QualificationKey = 0;
+                }
+                <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                <input type="hidden" asp-for="@Model.QualificationKey" />
+                <div>
+                    <input type="submit" value="Προσθήκη Νέου" class="btn govcy-btn-secondary" />
+                </div>
+            </form>
+
             <br>
-            <button type="button" class="govcy-btn-primary"><a asp-page="./CheckDetails" asp-all-route-data="getArguments">Επόμενο</a></button>
+
+            <form method="post" class="govcy-form" asp-page-handler="NextPage">
+                <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                <div>
+                    <input type="submit" value="Επόμενο" class="btn govcy-btn-primary" />
+                </div>
+            </form>
 
         </div>
 

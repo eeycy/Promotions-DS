@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -10,11 +10,18 @@ namespace EEY.DigitalServices.Promotions.Pages
     {
         private readonly ILogger<EditPhoneDetailsModel> _logger;
 
+        [TempData]
+        public int ApplicationIndexTemp { get; set; }
+
+
         [BindProperty]
         public int ApplicationIndex { get; set; }
 
+        [BindProperty, Required]
+        public string TelNumber { get; set; }
+
         [BindProperty]
-        public Mock.Data.Teacher ApplicantTeacher { get; set; } = new Mock.Data.Teacher();
+        public Mock.Data.Teacher ApplicantTeacher { get; set; }
 
 
         public EditPhoneDetailsModel(ILogger<EditPhoneDetailsModel> logger)
@@ -22,13 +29,16 @@ namespace EEY.DigitalServices.Promotions.Pages
             _logger = logger;
         }
 
-        public IActionResult OnGet(string applid)
+        public IActionResult OnGet()
         {
-            if (applid != null)
+            ApplicationIndex = ApplicationIndexTemp;
+            if (ApplicationIndex > 0)
             {
-                ApplicationIndex = JsonConvert.DeserializeObject<int>(applid);
-
+                // Get the data from EEY Web Service
                 ApplicantTeacher = Mock.Services.EEYWebService.getPersonalInfo("876123");
+
+                // Polulate bind property
+                TelNumber = ApplicantTeacher.TelNumber;
 
                 return Page();
             }
@@ -46,14 +56,18 @@ namespace EEY.DigitalServices.Promotions.Pages
             }
             else
             {
+
+                // Update record with value from page
+                ApplicantTeacher.TelNumber = TelNumber;
+
+                // Update record using EEY Web Service
                 Mock.Services.EEYWebService.updatePersonalInfo(ApplicantTeacher);
 
                 // CID - SHOULD RETURN TO THE REFERENCING PAGE.
                 // I.E. IF I AM COMING FROM PAGE CheckDetails, I SHOULD RETURN TO THAT
 
-                Dictionary<string, string> getArguments = new Dictionary<string, string>() { { "applid", JsonConvert.SerializeObject(ApplicationIndex) } };
-
-                return RedirectToPage("/CheckDetails", getArguments);
+                ApplicationIndexTemp = ApplicationIndex;
+                return RedirectToPage("/CheckDetails");
 
             }
 

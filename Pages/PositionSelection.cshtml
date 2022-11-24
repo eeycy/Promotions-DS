@@ -18,7 +18,6 @@
 
             @{
                 int i = 1;
-                Dictionary<string, string> getArguments;
             }
 
             <div class="govcy-table-responsive">
@@ -32,9 +31,6 @@
 
                         if (application.Active)
                         {
-
-                            getArguments = new Dictionary<string, string> { { "applid", JsonConvert.SerializeObject(@application.IDNumber) } };
-
                             <tr>
                                 <td><b>@i</b></td>
                                 <td>
@@ -46,7 +42,15 @@
                                     <b>Παραλήφθηκε</b>
                                 </td>
                                 <td>
-                                    <a id=@nextTagID asp-page="./CheckDetails" asp-all-route-data="getArguments">Επεξεργασία</a>
+                                    <form method="post" class="govcy-form" asp-page-handler="EditApplication">
+                                        @{
+                                            Model.ApplicationIndex = application.IDNumber;
+                                        }
+                                        <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                                        <div>
+                                            <input type="submit" value="Επεξεργασία" class="btn govcy-btn-secondary" />
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                             i++;
@@ -59,8 +63,6 @@
                         string deadlineTagID = "deadline" + i;
                         string nextTagID = "next" + i;
 
-                        getArguments = new Dictionary<string, string> { { "applid", JsonConvert.SerializeObject(@availablePost.IDNumber) } };
-
                         <tr>
                             <td><b>@i</b></td>
                             <td>
@@ -71,7 +73,15 @@
                             <td>
                             </td>
                             <td>
-                                <a id=@nextTagID asp-page="./Qualifications" asp-all-route-data="getArguments">Αίτηση</a>
+                                <form method="post" class="govcy-form" asp-page-handler="NewApplication">
+                                    @{
+                                        Model.ApplicationIndex = availablePost.IDNumber;
+                                    }
+                                    <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                                    <div>
+                                        <input type="submit" value="Αίτηση" class="btn govcy-btn-secondary" />
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                         i++;

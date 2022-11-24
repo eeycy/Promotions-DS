@@ -29,14 +29,33 @@
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.SpecialtyFull" />
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.TelNumber" />
 
-                <div class="govcy-form-control">
-                    <label class="govcy-label" for="@Model.ApplicantTeacher.EMail">E-mail</label>
-                    <span class="govcy-hint">Καταχωρήστε το e-mail σας</span>
-                    <input type="text" class="govcy-text-input govcy-text-input-char_10" asp-for="@Model.ApplicantTeacher.EMail" value="@Model.ApplicantTeacher.EMail">
-                    <span asp-validation-for="@Model.ApplicantTeacher.EMail"></span>
-                </div>
+                <fieldset class="govcy-fieldset">
+                    <div class="govcy-form-control" id="emailRadioControl">
+                        <label class="govcy-radio">
+                            Το e-mail που είναι καταχωρημένο στο αρχείο της ΕΕΥ: <b>@Model.EMail</b>
+                            <input class="govcy-radio-input" value="default" name="emailRadio" type="radio" checked="checked" data-bs-toggle="collapse" data-bs-target="#customEmail.show" />
+                            <span class="govcy-radio-checked"></span>
+                        </label>
+                        <label class="govcy-radio">
+                            Θα ήθελα να καταχωρήσω διαφορετικό e-mail
+                            <input class="govcy-radio-input" value="custom" name="emailRadio" type="radio" data-bs-toggle="collapse" data-bs-target="#customEmail:not(.show)" />
+                            <span class='govcy-radio-checked'></span>
+                        </label>
 
-@*                <fieldset class="govcy-fieldset">
+                        <div class="collapse govcy-pl-3 govcy-ml-1" id="customEmail">
+                            <div id="customEmail_text" class="@("govcy-form-control govcy-form-control-hint" + (Model.EMail=="" ? " govcy-form-control-error" : ""))">
+                                <label class="govcy-label" for="@Model.EMail">E-mail</label>
+                                <span id="customEmail_text_error" class="govcy-input-error-msg">@((Model.EMail == "" ? "Παρακαλώ περάστε ένα σωστό email address." : ""))</span>
+                                <span class="govcy-hint">Καταχωρήστε το e-mail σας</span>
+                                <input type="text" class="@("govcy-text-input" + (Model.EMail=="" ? " govcy-text-input-error" : ""))" asp-for="@Model.EMail">
+                                <span asp-validation-for="@Model.EMail"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+@*
+                <fieldset class="govcy-fieldset">
                     <div class="govcy-form-control" id="phoneRadioControl">
                         <span id="phoneRadioControl_error" class="govcy-input-error-msg"></span>
                         <label class="govcy-radio">Το τηλέφωνο που είναι καταχωρημένο στο αρχείο της ΕΕΥ: <b>@Model.TelNumber</b>
@@ -58,6 +77,7 @@
                     </div>
                 </fieldset>
 *@
+                <input type="hidden" asp-for="@Model.ApplicationIndex" />
                 <div>
                     <input type="submit" value="Αποθήκευση" class="btn govcy-btn-secondary" />
                 </div>

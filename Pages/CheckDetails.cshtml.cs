@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using EEY.DigitalServices.API;
 using EEY.DigitalServices.Data;
 
@@ -14,11 +13,18 @@ namespace EEY.DigitalServices.Promotions.Pages
         private readonly ILogger<CheckDetailsModel> _logger;
         private PromotionApplicationQualificationService _paqService { get; set; }
 
+        [TempData]
+        public int ApplicationIndexTemp { get; set; }
+        [TempData]
+        public int QualificationKeyTemp { get; set; }
+
+        [BindProperty]
+        public int ApplicationIndex { get; set; }
+        [BindProperty]
+        public int QualificationKey { get; set; }
+
         public Mock.Data.PromotionApplication CurrentApplication { get; set; } = new Mock.Data.PromotionApplication(0, new Mock.Data.PublishedPost(), false);
-        public int ApplicationIndex;
-
         public List<PromotionApplicationQualification> TeacherQualifications { get; set; } = new List<PromotionApplicationQualification>();
-
         public Mock.Data.Teacher ApplicantTeacher { get; set; } = new Mock.Data.Teacher();
 
         public CheckDetailsModel(ILogger<CheckDetailsModel> logger, PromotionApplicationQualificationService pacService)
@@ -27,12 +33,11 @@ namespace EEY.DigitalServices.Promotions.Pages
             _paqService = pacService;
         }
 
-        public async Task<IActionResult> OnGetAsync(string applid)
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (applid != null)
+            ApplicationIndex = ApplicationIndexTemp;
+            if (ApplicationIndex > 0)
             {
-                ApplicationIndex = JsonConvert.DeserializeObject<int>(applid);
-
                 ApplicantTeacher = Mock.Services.EEYWebService.getPersonalInfo("876123");
 
                 CurrentApplication = Mock.Services.EEYWebService.getApplication(ApplicationIndex);
@@ -50,6 +55,26 @@ namespace EEY.DigitalServices.Promotions.Pages
             return Page();
 
         }
+
+        public IActionResult OnPostAddEditQualification()
+        {
+            ApplicationIndexTemp = ApplicationIndex;
+            QualificationKeyTemp = QualificationKey;
+            return RedirectToPage("/QualificationsAddEdit");
+        }
+
+        public IActionResult OnPostEditPhone()
+        {
+            ApplicationIndexTemp = ApplicationIndex;
+            return RedirectToPage("/EditPhoneDetails");
+        }
+
+        public IActionResult OnPostEditEmail()
+        {
+            ApplicationIndexTemp = ApplicationIndex;
+            return RedirectToPage("/EditEmailDetails");
+        }
+
     }
 
 }

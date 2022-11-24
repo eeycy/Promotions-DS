@@ -29,35 +29,55 @@
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.SpecialtyFull" />
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.EMail" />
 
-                <div class="govcy-form-control">
-                    <label class="govcy-label" for="@Model.ApplicantTeacher.TelNumber">Τηλέφωνο</label>
-                    <span class="govcy-hint">Καταχωρήστε το τηλέφωνό σας</span>
-                    <input type="text" class="govcy-text-input govcy-text-input-char_10" asp-for="@Model.ApplicantTeacher.TelNumber" value="@Model.ApplicantTeacher.TelNumber">
-                    <span asp-validation-for="@Model.ApplicantTeacher.TelNumber"></span>
-                </div>
-
-@*                <fieldset class="govcy-fieldset">
+                <fieldset class="govcy-fieldset">
                     <div class="govcy-form-control" id="phoneRadioControl">
-                        <span id="phoneRadioControl_error" class="govcy-input-error-msg"></span>
-                        <label class="govcy-radio">Το τηλέφωνο που είναι καταχωρημένο στο αρχείο της ΕΕΥ: <b>@Model.TelNumber</b>
-                            <input class="govcy-radio-input" value="default" name="phoneRadio" type="radio" checked="checked" data-bs-toggle="collapse" data-bs-target="#phoneN.show" />
+                        <label class="govcy-radio">
+                            Το τηλέφωνο που είναι καταχωρημένο στο αρχείο της ΕΕΥ: <b>@Model.TelNumber</b>
+                            <input class="govcy-radio-input" value="default" name="phoneRadio" type="radio" checked="checked" data-bs-toggle="collapse" data-bs-target="#customPhone.show" />
                             <span class="govcy-radio-checked"></span>
                         </label>
-                        <label class="govcy-radio">Θα ήθελα να καταχωρήσω διαφορετικό τηλέφωνο
-                            <input class="govcy-radio-input" value="custom" name="phoneRadio" type="radio" data-bs-toggle="collapse" data-bs-target="#phoneN:not(.show)" />
+                        <label class="govcy-radio">
+                            Θα ήθελα να καταχωρήσω διαφορετικό τηλέφωνο
+                            <input class="govcy-radio-input" value="custom" name="phoneRadio" type="radio" data-bs-toggle="collapse" data-bs-target="#customPhone:not(.show)" />
                             <span class='govcy-radio-checked'></span>
                         </label>
-                        <div class="collapse govcy-pl-3 govcy-ml-1" id="phoneN">
-                            <div id="phoneNumIn" class="govcy-form-control govcy-form-control-hint">
-                            <label class="govcy-label">Τηλέφωνο</label>
-                                <span id="phoneNumIn_error" class="govcy-input-error-msg"></span>
-                                <span class="govcy-hint">Θα χρησιμοποιηθεί μόνο για τους σκοπούς αυτής της αίτησης</span>
-                                <input type="text" class="govcy-text-input govcy-text-input-char_10" name="phoneNum" asp-for="@Model.TelNumber" />
+
+                        <div class="collapse govcy-pl-3 govcy-ml-1" id="customPhone">
+                            <div id="customPhone_text" class="@("govcy-form-control govcy-form-control-hint" + (Model.TelNumber=="" ? " govcy-form-control-error" : ""))">
+                                <label class="govcy-label" for="@Model.TelNumber">Τηλέφωνο</label>
+                                <span id="customPhone_text_error" class="govcy-input-error-msg">@((Model.TelNumber == "" ? "Παρακαλώ περάστε ένα σωστό τηλέφωνο." : ""))</span>
+                                <span class="govcy-hint">Καταχωρήστε το τηλέφωνό σας</span>
+                                <input type="text" class="@("govcy-text-input" + (Model.TelNumber=="" ? " govcy-text-input-error" : ""))" asp-for="@Model.TelNumber">
+                                <span asp-validation-for="@Model.TelNumber"></span>
                             </div>
                         </div>
                     </div>
                 </fieldset>
-*@
+
+                @*
+                <fieldset class="govcy-fieldset">
+                <div class="govcy-form-control" id="phoneRadioControl">
+                <span id="phoneRadioControl_error" class="govcy-input-error-msg"></span>
+                <label class="govcy-radio">Το τηλέφωνο που είναι καταχωρημένο στο αρχείο της ΕΕΥ: <b>@Model.TelNumber</b>
+                <input class="govcy-radio-input" value="default" name="phoneRadio" type="radio" checked="checked" data-bs-toggle="collapse" data-bs-target="#phoneN.show" />
+                <span class="govcy-radio-checked"></span>
+                </label>
+                <label class="govcy-radio">Θα ήθελα να καταχωρήσω διαφορετικό τηλέφωνο
+                <input class="govcy-radio-input" value="custom" name="phoneRadio" type="radio" data-bs-toggle="collapse" data-bs-target="#phoneN:not(.show)" />
+                <span class='govcy-radio-checked'></span>
+                </label>
+                <div class="collapse govcy-pl-3 govcy-ml-1" id="phoneN">
+                <div id="phoneNumIn" class="govcy-form-control govcy-form-control-hint">
+                <label class="govcy-label">Τηλέφωνο</label>
+                <span id="phoneNumIn_error" class="govcy-input-error-msg"></span>
+                <span class="govcy-hint">Θα χρησιμοποιηθεί μόνο για τους σκοπούς αυτής της αίτησης</span>
+                <input type="text" class="govcy-text-input govcy-text-input-char_10" name="phoneNum" asp-for="@Model.TelNumber" />
+                </div>
+                </div>
+                </div>
+                </fieldset>
+                *@
+                <input type="hidden" asp-for="@Model.ApplicationIndex" />
                 <div>
                     <input type="submit" value="Αποθήκευση" class="btn govcy-btn-secondary" />
                 </div>
@@ -68,4 +88,5 @@
 
     </div>
 </main>
+
 

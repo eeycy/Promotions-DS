@@ -17,8 +17,6 @@
 
             @{
                 int i = 1;
-                Dictionary<string, string> getArguments;
-                Dictionary<string, string> detailEditArguments = new Dictionary<string, string> { { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) } };
             }
 
             <div class="govcy-table-responsive">
@@ -35,20 +33,43 @@
                             <b>Αρ. Φακέλου: </b>
                             <br>
                             <span id=fileNumberCheck>@Model.ApplicantTeacher.FileNumber</span>
-                            <br>
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
                             <b>Τηλέφωνο: </b>
                             <br>
                             <span id=telNumberCheck>@Model.ApplicantTeacher.TelNumber</span>
-                            <br>
+                        </td>
+                        <td>
+                            <form method="post" class="govcy-form" asp-page-handler="EditPhone">
+                                <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                                <div>
+                                    <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
                             <b>E-mail: </b>
                             <br>
                             <span id=eMailCheck>@Model.ApplicantTeacher.EMail</span>
                         </td>
                         <td>
-                            <br><br><br><br><br>
-                            <a asp-page="./EditPhoneDetails" asp-all-route-data="detailEditArguments">Αλλαγή</a>
-                            <br><br>
-                            <a asp-page="./EditEmailDetails" asp-all-route-data="detailEditArguments">Αλλαγή</a>
+                            <form method="post" class="govcy-form" asp-page-handler="EditEmail">
+                                <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                                <div>
+                                    <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
+                                </div>
+                            </form>
                         </td>
                     </tr>
 
@@ -68,11 +89,6 @@
                         string nextTagID = "next" + i;
                         string qualificationsHeading;
 
-                        getArguments = new Dictionary<string, string> {
-                            { "qualid", JsonConvert.SerializeObject(qualification.AutoKey) },
-                            { "applid", JsonConvert.SerializeObject(Model.ApplicationIndex) }
-                        };
-
                         if (@i == 1)
                             qualificationsHeading = "Πρόσθετα Ακαδημαϊκά Προσόντα";
                         else
@@ -90,7 +106,16 @@
                                 <b>Έτος απόκτησης: </b><span id=@yearToTagID>@qualification.ToYear</span>
                             </td>
                             <td>
-                                <a asp-page="./QualificationsAddEdit" asp-all-route-data="getArguments">Αλλαγή</a>
+                                <form method="post" class="govcy-form" asp-page-handler="AddEditQualification">
+                                    @{
+                                        Model.QualificationKey = qualification.AutoKey;
+                                    }
+                                    <input type="hidden" asp-for="@Model.ApplicationIndex" />
+                                    <input type="hidden" asp-for="@Model.QualificationKey" />
+                                    <div>
+                                        <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
+                                    </div>
+                                </form>
                             </td>
                         </tr>
 

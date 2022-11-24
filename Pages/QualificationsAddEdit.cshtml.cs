@@ -2,10 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using EEY.DigitalServices.Data;
 using EEY.DigitalServices.API;
-using System.Collections.Generic;
 
 namespace EEY.DigitalServices.Promotions.Pages
 {
@@ -14,8 +12,20 @@ namespace EEY.DigitalServices.Promotions.Pages
         private readonly ILogger<QualificationsAddEditModel> _logger;
         private PromotionApplicationQualificationService _paqService { get; set; }
 
+        [TempData]
+        public int ApplicationIndexTemp { get; set; }
+        [TempData]
+        public int QualificationKeyTemp { get; set; }
+
+
+        [BindProperty]
+        public int ApplicationIndex { get; set; }
+        [BindProperty]
+        public int QualificationKey { get; set; }
+
         [BindProperty]
         public PromotionApplicationQualification Qualification { get; set; } = new PromotionApplicationQualification();
+
 
         public QualificationsAddEditModel(ILogger<QualificationsAddEditModel> logger, PromotionApplicationQualificationService pacService)
         {
@@ -23,21 +33,26 @@ namespace EEY.DigitalServices.Promotions.Pages
             _paqService = pacService;
         }
 
-        public async Task<IActionResult> OnGetAsync(string qualid, string applid)
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (qualid != null && applid != null)
-            {
-                int qualificationIndex = JsonConvert.DeserializeObject<int>(qualid);
-                int applicationIndex = JsonConvert.DeserializeObject<int>(applid);
+            ApplicationIndex = ApplicationIndexTemp;
+            QualificationKey = QualificationKeyTemp;
 
-                if (qualificationIndex > 0)
+            if (ApplicationIndex > 0 && QualificationKey >= 0)
+            {
+                if (QualificationKey > 0)
                 {
-                    Qualification = await _paqService.Get(qualificationIndex);
+                    Qualification = await _paqService.Get(QualificationKey);
+
+                    // CID - DEBUGGING:
+                    // The service does not return a valid code (always 1).
+                    // Replace it with the one from page
+                    Qualification.ApplicationCode = ApplicationIndex;
                 }
                 else
                 {
                     Qualification = new PromotionApplicationQualification();
-                    Qualification.ApplicationCode = applicationIndex;
+                    Qualification.ApplicationCode = ApplicationIndex;
                 }
             }
             else
@@ -70,11 +85,10 @@ namespace EEY.DigitalServices.Promotions.Pages
                     // CID - DEBUGGING:
                     Qualification.ApplicationCode = originalApplicationIndex;
 
-                    Dictionary<string, string> getArguments = new Dictionary<string, string>() { { "applid", JsonConvert.SerializeObject(Qualification.ApplicationCode) } };
-
                     // CID - SHOULD RETURN TO THE REFERENCING PAGE.
                     // I.E. IF I AM COMING FROM PAGE CheckDetails, I SHOULD RETURN TO THAT
-                    return RedirectToPage("/Qualifications", getArguments);
+                    ApplicationIndexTemp = Qualification.ApplicationCode;
+                    return RedirectToPage("/Qualifications");
                 }
 
             }
