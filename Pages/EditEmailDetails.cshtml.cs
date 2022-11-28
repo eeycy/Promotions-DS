@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -10,13 +12,6 @@ namespace EEY.DigitalServices.Promotions.Pages
     {
         private readonly ILogger<EditEmailDetailsModel> _logger;
 
-
-        [TempData]
-        public int ApplicationIndexTemp { get; set; }
-
-
-        [BindProperty]
-        public int ApplicationIndex { get; set; }
 
         [BindProperty, Required]
         public string EMail { get; set; }
@@ -32,16 +27,23 @@ namespace EEY.DigitalServices.Promotions.Pages
 
         public IActionResult OnGet()
         {
-            ApplicationIndex = ApplicationIndexTemp;
-            if (ApplicationIndex > 0)
+            int ApplicationIndex;
+
+            if (HttpContext.Session.TryGetValue("ApplicationIndex", out byte[] resultai))
             {
-                // Get the data from EEY Web Service
-                ApplicantTeacher = Mock.Services.EEYWebService.getPersonalInfo("876123");
+                ApplicationIndex = (int) HttpContext.Session.GetInt32("ApplicationIndex");
 
-                // Polulate bind property
-                EMail = ApplicantTeacher.EMail;
+                if (ApplicationIndex > 0)
+                {
+                    // Get the data from EEY Web Service
+                    ApplicantTeacher = Mock.Services.EEYWebService.getPersonalInfo("876123");
 
-                return Page();
+                    // Polulate bind property
+                    EMail = ApplicantTeacher.EMail;
+
+                    return Page();
+                }
+
             }
 
             return NotFound();
@@ -67,7 +69,6 @@ namespace EEY.DigitalServices.Promotions.Pages
                 // CID - SHOULD RETURN TO THE REFERENCING PAGE.
                 // I.E. IF I AM COMING FROM PAGE CheckDetails, I SHOULD RETURN TO THAT
 
-                ApplicationIndexTemp = ApplicationIndex;
                 return RedirectToPage("/CheckDetails");
 
             }

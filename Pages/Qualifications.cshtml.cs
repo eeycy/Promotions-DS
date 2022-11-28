@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using EEY.DigitalServices.Data;
 using EEY.DigitalServices.API;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace EEY.DigitalServices.Promotions.Pages
 {
@@ -13,13 +15,6 @@ namespace EEY.DigitalServices.Promotions.Pages
         private readonly ILogger<QualificationsModel> _logger;
         private PromotionApplicationQualificationService _paqService { get; set; }
 
-        [TempData]
-        public int ApplicationIndexTemp { get; set; }
-        [TempData]
-        public int QualificationKeyTemp { get; set; }
-
-        [BindProperty]
-        public int ApplicationIndex { get; set; }
         [BindProperty]
         public int QualificationKey { get; set; }
 
@@ -33,15 +28,22 @@ namespace EEY.DigitalServices.Promotions.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            ApplicationIndex = ApplicationIndexTemp;
-            if (ApplicationIndex > 0)
+            int ApplicationIndex;
+
+            if (HttpContext.Session.TryGetValue("ApplicationIndex", out byte[] result))
             {
-                // CID - DEBUGGING:
-                int dummyApplicationIndex = 1;
+                ApplicationIndex = (int) HttpContext.Session.GetInt32("ApplicationIndex");
 
-                TeacherQualifications = await _paqService.GetAppQualifications(dummyApplicationIndex);
+                if (ApplicationIndex > 0)
+                {
+                    // CID - DEBUGGING:
+                    int dummyApplicationIndex = 1;
+
+                    TeacherQualifications = await _paqService.GetAppQualifications(dummyApplicationIndex);
+                }
+                else
+                    return NotFound();
             }
-
             else
                 return NotFound();
 
@@ -49,16 +51,15 @@ namespace EEY.DigitalServices.Promotions.Pages
             return Page();
 
         }
+
         public IActionResult OnPostAddEditQualification()
         {
-            ApplicationIndexTemp = ApplicationIndex;
-            QualificationKeyTemp = QualificationKey;
+            HttpContext.Session.SetInt32("QualificationKey", QualificationKey);
             return RedirectToPage("/QualificationsAddEdit");
         }
 
         public IActionResult OnPostNextPage()
         {
-            ApplicationIndexTemp = ApplicationIndex;
             return RedirectToPage("/CheckDetails");
         }
     }

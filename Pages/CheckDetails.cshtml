@@ -46,12 +46,8 @@
                             <span id=telNumberCheck>@Model.ApplicantTeacher.TelNumber</span>
                         </td>
                         <td>
-                            <form method="post" class="govcy-form" asp-page-handler="EditPhone">
-                                <input type="hidden" asp-for="@Model.ApplicationIndex" />
-                                <div>
-                                    <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
-                                </div>
-                            </form>
+                            <br>
+                            <div class="govcy-mb-4"><a href="/EditPhoneDetails">Αλλαγή</a></div>
                         </td>
                     </tr>
 
@@ -64,12 +60,8 @@
                             <span id=eMailCheck>@Model.ApplicantTeacher.EMail</span>
                         </td>
                         <td>
-                            <form method="post" class="govcy-form" asp-page-handler="EditEmail">
-                                <input type="hidden" asp-for="@Model.ApplicationIndex" />
-                                <div>
-                                    <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
-                                </div>
-                            </form>
+                            <br>
+                            <div class="govcy-mb-4"><a href="/EditEmailDetails">Αλλαγή</a></div>
                         </td>
                     </tr>
 
@@ -86,7 +78,7 @@
                         string institutiionTagID = "institution" + i;
                         string countryTagID = "country" + i;
                         string yearToTagID = "yearTo" + i;
-                        string nextTagID = "next" + i;
+                        string actionTagID = "action" + i;
                         string qualificationsHeading;
 
                         if (@i == 1)
@@ -106,14 +98,13 @@
                                 <b>Έτος απόκτησης: </b><span id=@yearToTagID>@qualification.ToYear</span>
                             </td>
                             <td>
-                                <form method="post" class="govcy-form" asp-page-handler="AddEditQualification">
+                                <form id=@actionTagID method="post" class="govcy-form" asp-page-handler="AddEditQualification">
                                     @{
                                         Model.QualificationKey = qualification.AutoKey;
                                     }
-                                    <input type="hidden" asp-for="@Model.ApplicationIndex" />
                                     <input type="hidden" asp-for="@Model.QualificationKey" />
-                                    <div>
-                                        <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
+                                    <div class="govcy-mb-4">
+                                        <a href="#" onclick=document.getElementById("@actionTagID").submit();>Αλλαγή</a>
                                     </div>
                                 </form>
                             </td>

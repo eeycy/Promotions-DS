@@ -30,7 +30,7 @@
                         string institutiionTagID = "institution" + i;
                         string countryTagID = "country" + i;
                         string yearToTagID = "yearTo" + i;
-                        string nextTagID = "next" + i;
+                        string actionTagID = "action" + i;
 
                         <tr>
                             <td><b>@i</b></td>
@@ -53,14 +53,13 @@
                                 <span id=@yearToTagID>@qualification.ToYear</span>
                             </td>
                             <td>
-                                <form method="post" class="govcy-form" asp-page-handler="AddEditQualification">
+                                <form id=@actionTagID method="post" class="govcy-form" asp-page-handler="AddEditQualification">
                                     @{
                                         Model.QualificationKey = qualification.AutoKey;
                                     }
-                                    <input type="hidden" asp-for="@Model.ApplicationIndex" />
                                     <input type="hidden" asp-for="@Model.QualificationKey" />
-                                    <div>
-                                        <input type="submit" value="Αλλαγή" class="btn govcy-btn-secondary" />
+                                    <div class="govcy-mb-4">
+                                        <a href="#" onclick=document.getElementById("@actionTagID").submit();>Αλλαγή</a>
                                     </div>
                                 </form>
                             </td>
@@ -74,7 +73,6 @@
                 @{
                     Model.QualificationKey = 0;
                 }
-                <input type="hidden" asp-for="@Model.ApplicationIndex" />
                 <input type="hidden" asp-for="@Model.QualificationKey" />
                 <div>
                     <input type="submit" value="Προσθήκη Νέου" class="btn govcy-btn-secondary" />
@@ -84,7 +82,6 @@
             <br>
 
             <form method="post" class="govcy-form" asp-page-handler="NextPage">
-                <input type="hidden" asp-for="@Model.ApplicationIndex" />
                 <div>
                     <input type="submit" value="Επόμενο" class="btn govcy-btn-primary" />
                 </div>

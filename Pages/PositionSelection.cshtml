@@ -27,7 +27,7 @@
                         string positionTagID = "position" + i;
                         string publicationTagID = "publication" + i;
                         string deadlineTagID = "deadline" + i;
-                        string nextTagID = "next" + i;
+                        string actionTagID = "action" + i;
 
                         if (application.Active)
                         {
@@ -42,13 +42,13 @@
                                     <b>Παραλήφθηκε</b>
                                 </td>
                                 <td>
-                                    <form method="post" class="govcy-form" asp-page-handler="EditApplication">
+                                    <form id=@actionTagID method="post" class="govcy-form" asp-page-handler="EditApplication">
                                         @{
                                             Model.ApplicationIndex = application.IDNumber;
                                         }
                                         <input type="hidden" asp-for="@Model.ApplicationIndex" />
-                                        <div>
-                                            <input type="submit" value="Επεξεργασία" class="btn govcy-btn-secondary" />
+                                        <div class="govcy-mb-4">
+                                            <a href="#" onclick=document.getElementById("@actionTagID").submit();>Επεξεργασία</a>
                                         </div>
                                     </form>
                                 </td>
@@ -61,7 +61,7 @@
                         string positionTagID = "position" + i;
                         string publicationTagID = "publication" + i;
                         string deadlineTagID = "deadline" + i;
-                        string nextTagID = "next" + i;
+                        string actionTagID = "action" + i;
 
                         <tr>
                             <td><b>@i</b></td>
@@ -73,13 +73,13 @@
                             <td>
                             </td>
                             <td>
-                                <form method="post" class="govcy-form" asp-page-handler="NewApplication">
+                                <form id=@actionTagID method="post" class="govcy-form" asp-page-handler="NewApplication">
                                     @{
                                         Model.ApplicationIndex = availablePost.IDNumber;
                                     }
                                     <input type="hidden" asp-for="@Model.ApplicationIndex" />
-                                    <div>
-                                        <input type="submit" value="Αίτηση" class="btn govcy-btn-secondary" />
+                                    <div class="govcy-mb-4">
+                                        <a href="#" onclick=document.getElementById("@actionTagID").submit();>Αίτηση</a>
                                     </div>
                                 </form>
                             </td>
@@ -89,7 +89,7 @@
                 </table>
             </div>
 
-            <div class="govcy-mb-4"><a href="~/ApplicationHistory">Ιστορικό Ολοκληρωμένων Αιτήσεων</a></div>
+            <div class="govcy-mb-4"><a href="/ApplicationHistory">Ιστορικό Ολοκληρωμένων Αιτήσεων</a></div>
 
         </div>
 

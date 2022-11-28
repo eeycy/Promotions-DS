@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -8,10 +9,6 @@ namespace EEY.DigitalServices.Promotions.Pages
     public class PositionSelectionModel : PageModel
     {
         private readonly ILogger<PositionSelectionModel> _logger;
-
-        [TempData]
-        public int ApplicationIndexTemp { get; set; }
-
 
         [BindProperty]
         public int ApplicationIndex { get; set; }
@@ -36,18 +33,20 @@ namespace EEY.DigitalServices.Promotions.Pages
 
             Applications = Mock.Services.EEYWebService.getPromotionApplications();
 
+            HttpContext.Session.SetInt32("ApplicationIndex", ApplicationIndex);
+
             return Page();
         }
 
         public IActionResult OnPostEditApplication()
         {
-            ApplicationIndexTemp = ApplicationIndex;
+            HttpContext.Session.SetInt32("ApplicationIndex", ApplicationIndex);
             return RedirectToPage("/CheckDetails");
         }
 
         public IActionResult OnPostNewApplication()
         {
-            ApplicationIndexTemp = ApplicationIndex;
+            HttpContext.Session.SetInt32("ApplicationIndex", ApplicationIndex);
             return RedirectToPage("/Qualifications");
         }
 

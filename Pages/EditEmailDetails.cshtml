@@ -15,8 +15,6 @@
 
             <form method="post" class="govcy-form">
 
-                <input type="hidden" asp-for="@Model.ApplicationIndex" />
-
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.IDNumber" />
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.Level" />
                 <input type="hidden" asp-for="@Model.ApplicantTeacher.FileNumber" />
@@ -77,7 +75,6 @@
                     </div>
                 </fieldset>
 *@
-                <input type="hidden" asp-for="@Model.ApplicationIndex" />
                 <div>
                     <input type="submit" value="Αποθήκευση" class="btn govcy-btn-secondary" />
                 </div>
